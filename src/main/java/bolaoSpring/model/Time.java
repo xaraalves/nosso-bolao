@@ -13,15 +13,20 @@ public class Time {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
+
 	private String nome;
 	private Date dataFundacao;
+
+	public Time() {}
+
+	public Time(String nome, Date dataFundacao) {
+		this.nome = nome;
+		this.dataFundacao = dataFundacao;
+	}
 	
 	/* Getters e Setters */
 	public Long getId() {
 		return Id;
-	}
-	public void setId(Long id) {
-		Id = id;
 	}
 	public String getNome() {
 		return nome;

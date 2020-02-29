@@ -20,16 +20,16 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public ResponseEntity<String> cadastrarUsuario(UsuarioRequest usuarioCriar) {
+    public String cadastrarUsuario(UsuarioRequest usuarioRequest) {
         //Pesquisa se o login/email já existe
-        Usuario usuarioPesquisa = usuarioRepository.findByLogin(usuarioCriar.getLogin());
+        Usuario usuarioPesquisa = usuarioRepository.findByLogin(usuarioRequest.getLogin());
         if(usuarioPesquisa != null) {
-            return new ResponseEntity<String>("Já existe um usuário com esse email " + usuarioCriar.getLogin() + " cadastrado!", HttpStatus.NOT_FOUND);
+            return "ERRO_LOGIN";
         }else {
-            String senhaHash = passwordEncoder.encode(usuarioCriar.getSenha());
-            usuarioRepository.save(new Usuario(usuarioCriar.getLogin(), senhaHash, new Date()));
+            String senhaHash = passwordEncoder.encode(usuarioRequest.getSenha());
+            usuarioRepository.save(new Usuario(usuarioRequest.getLogin(), senhaHash, new Date()));
         }
-        return new ResponseEntity<String>("Usuário cadastrado com sucesso!", HttpStatus.OK);
+        return "OK";
     }
 
 }

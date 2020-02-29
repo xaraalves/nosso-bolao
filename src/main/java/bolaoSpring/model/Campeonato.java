@@ -13,9 +13,18 @@ public class Campeonato {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
+
 	private String nome;
 	private Date dataInicio;
 	private Integer qtdeTimes;
+
+	public Campeonato() {}
+
+	public Campeonato (String nome, Date dataInicio, Integer qtdeTimes) {
+		this.nome = nome;
+		this.dataInicio = dataInicio;
+		this.qtdeTimes = qtdeTimes;
+	}
 	
 	/* Getters e Setters */
 	public Long getId() {

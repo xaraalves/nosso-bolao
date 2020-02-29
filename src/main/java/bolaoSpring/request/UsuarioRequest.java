@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class UsuarioRequest {
     
     @NotNull(message = "Login não pode ser nulo")
-    @NotEmpty(message = "Login não pode ser em branco")
+    @NotEmpty(message = "Login não pode estar em branco")
     @Email(message = "Login precisa ser um email válido")
     private String login;
 
