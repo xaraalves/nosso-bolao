@@ -1,11 +1,16 @@
-package bolaoSpring.request;
+package bolaoSpring.controller.form;
+
+import bolaoSpring.model.Time;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
-public class CampeonatoRequest {
+public class CampeonatoForm {
 
     @NotNull(message = "Nome não pode ser nulo")
     @NotEmpty(message = "Nome não pode estar em branco")
@@ -17,6 +22,8 @@ public class CampeonatoRequest {
 
     @NotNull(message = "Quantidade de times não pode ser nula")
     private Integer qtdeTimes;
+
+    private List<Time> times;
 
     public String getNome() {
         return nome;
@@ -40,5 +47,25 @@ public class CampeonatoRequest {
 
     public void setQtdeTimes(Integer qtdeTimes) {
         this.qtdeTimes = qtdeTimes;
+    }
+
+    public List<Time> getTimes() {
+        if(times == null)
+            return Collections.emptyList();
+
+        return times;
+    }
+
+    public List<String> getNomesTimes() {
+        List<String> nomesTimes = new ArrayList<>();
+        for(int i=0; i < times.size(); i++) {
+            nomesTimes.add(times.get(i).getNome());
+        }
+
+        return nomesTimes;
+    }
+
+    public void setTimes(List<Time> times) {
+        this.times = times;
     }
 }

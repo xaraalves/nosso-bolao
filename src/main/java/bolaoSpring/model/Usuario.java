@@ -1,6 +1,6 @@
 package bolaoSpring.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,13 +18,13 @@ public class Usuario {
 	@Column(unique = true)
 	private String login;
 
-	private Date dataHora;
+	private LocalDateTime dataHora;
 
 	private String senha;
 
 	public Usuario() {}
 
-	public Usuario(String login, String senha, Date data) {
+	public Usuario(String login, String senha, LocalDateTime data) {
 		this.login = login;
 		this.senha = senha;
 		this.dataHora = data;
@@ -43,10 +43,10 @@ public class Usuario {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	public Date getDataHora() {
+	public LocalDateTime getDataHora() {
 		return dataHora;
 	}
-	public void setDataHora(Date dataHora) {
+	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
 	public String getSenha() {

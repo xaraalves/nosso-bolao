@@ -1,11 +1,11 @@
-package bolaoSpring.request;
+package bolaoSpring.controller.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
-public class TimeRequest {
+public class TimeForm {
 
     @NotNull(message = "Nome do time não pode ser nulo")
     @NotEmpty(message = "Nome do time não pode estar em branco")

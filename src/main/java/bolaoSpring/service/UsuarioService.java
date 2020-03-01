@@ -1,15 +1,14 @@
 package bolaoSpring.service;
 
+import bolaoSpring.controller.dto.UsuarioDto;
 import bolaoSpring.model.Usuario;
 import bolaoSpring.repository.UsuarioRepository;
-import bolaoSpring.request.UsuarioRequest;
+import bolaoSpring.controller.form.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 public class UsuarioService {
@@ -20,21 +19,21 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String cadastrarUsuario(UsuarioRequest usuarioRequest) {
+    public String cadastrarUsuario(UsuarioForm usuarioForm) {
         //Pesquisa se o login/email já existe
-        Usuario usuarioPesquisa = usuarioRepository.findByLogin(usuarioRequest.getLogin());
+        Usuario usuarioPesquisa = usuarioRepository.findByLogin(usuarioForm.getLogin());
         if(usuarioPesquisa != null) {
             return "ERRO_LOGIN";
         }else {
-            String senhaHash = passwordEncoder.encode(usuarioRequest.getSenha());
-            usuarioRepository.save(new Usuario(usuarioRequest.getLogin(), senhaHash, new Date()));
+            String senhaHash = passwordEncoder.encode(usuarioForm.getSenha());
+            usuarioRepository.save(new Usuario(usuarioForm.getLogin(), senhaHash, LocalDateTime.now()));
         }
         return "OK";
     }
 
-    public UsuarioRequest buscarUsuarioCadastrado(String login) {
+    public UsuarioDto buscarUsuarioCadastrado(String login) {
         Usuario novoUsuario = usuarioRepository.findByLogin(login);
-        return new UsuarioRequest(novoUsuario);
+        return new UsuarioDto(novoUsuario);
     }
 
 }
