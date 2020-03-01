@@ -32,4 +32,9 @@ public class UsuarioService {
         return "OK";
     }
 
+    public UsuarioRequest buscarUsuarioCadastrado(String login) {
+        Usuario novoUsuario = usuarioRepository.findByLogin(login);
+        return new UsuarioRequest(novoUsuario);
+    }
+
 }

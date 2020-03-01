@@ -1,5 +1,6 @@
 package bolaoSpring.request;
 
+import bolaoSpring.model.Usuario;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -17,6 +18,13 @@ public class UsuarioRequest {
     @NotEmpty(message = "Senha não pode ser em branco")
     @Length(min = 6, message="Senha precisa ter no mínimo 6 caracteres")
     private String senha;
+
+    public UsuarioRequest() {}
+
+    public UsuarioRequest(Usuario usuario) {
+        this.login = usuario.getLogin();
+        this.senha = usuario.getSenha();
+    }
 
     public String getLogin() {
         return login;
