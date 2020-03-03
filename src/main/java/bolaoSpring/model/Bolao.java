@@ -1,14 +1,9 @@
 package bolaoSpring.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Bolao {
@@ -18,12 +13,21 @@ public class Bolao {
 	private Long Id;
 	@OneToOne
 	private Usuario usuario;
-	private Date dataCriacao;
+	private LocalDateTime dataCriacao;
 	@OneToOne
 	private Campeonato campeonato;
-	@OneToMany
-	private List<Participante> participantes;
-	
+	@ElementCollection
+	private List<String> participantes;
+
+	public Bolao() { }
+
+	public Bolao(Usuario usuario, LocalDateTime dataCriacao, Campeonato campeonato, List<String> participantes) {
+		this.usuario = usuario;
+		this.dataCriacao = dataCriacao;
+		this.campeonato = campeonato;
+		this.participantes = participantes;
+	}
+
 	//Getters e Setters
 	public Long getId() {
 		return Id;
@@ -37,10 +41,10 @@ public class Bolao {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Date getDataCriacao() {
+	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
-	public void setDataCriacao(Date dataCriacao) {
+	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 	public Campeonato getCampeonato() {
@@ -49,10 +53,10 @@ public class Bolao {
 	public void setCampeonato(Campeonato campeonato) {
 		this.campeonato = campeonato;
 	}
-	public List<Participante> getParticipantes() {
+	public List<String> getParticipantes() {
 		return participantes;
 	}
-	public void setParticipantes(List<Participante> participantes) {
+	public void setParticipantes(List<String> participantes) {
 		this.participantes = participantes;
 	}
 	

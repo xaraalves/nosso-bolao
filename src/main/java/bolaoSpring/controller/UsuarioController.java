@@ -2,9 +2,12 @@ package bolaoSpring.controller;
 
 import javax.validation.Valid;
 
+import bolaoSpring.controller.dto.UsuarioDto;
 import bolaoSpring.controller.form.UsuarioForm;
 import bolaoSpring.service.UsuarioService;
+import bolaoSpring.service.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,16 +24,14 @@ public class UsuarioController {
 
 	@PostMapping("/usuario/cadastro")
 	private ResponseEntity criarUsuario(@Valid @RequestBody UsuarioForm usuarioForm, UriComponentsBuilder uriComponentsBuilder) {
-		String retorno = usuarioService.cadastrarUsuario(usuarioForm);
-		URI uri = uriComponentsBuilder.path("/usuario/{id}").buildAndExpand(usuarioForm.getLogin()).toUri();
-		if(retorno.equals("OK")){
-			return ResponseEntity.created(uri).body(usuarioService.buscarUsuarioCadastrado(usuarioForm.getLogin()));
+
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioDto(usuarioService.cadastrarUsuario(usuarioForm)));
 		}
-		else if(retorno.equals("ERRO_LOGIN")) {
-			return ResponseEntity.badRequest().body("Já existe um usuário cadastrado com o email " + usuarioForm.getLogin() + ".");
+		catch (UserAlreadyExistsException userAlreadyExistsException) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 
-		return ResponseEntity.badRequest().build();
 	}
 
 }

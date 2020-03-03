@@ -3,27 +3,22 @@ package bolaoSpring.controller.dto;
 import bolaoSpring.model.Usuario;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class UsuarioDto {
 
     private String login;
-    private String senha;
     private LocalDateTime dataRegistro;
 
-    public UsuarioDto() {}
+    public UsuarioDto(Optional<Usuario> novoUsuario) {}
 
     public UsuarioDto(Usuario usuario) {
         this.login = usuario.getLogin();
-        this.senha = usuario.getSenha();
         this.dataRegistro = usuario.getDataHora();
     }
 
     public String getLogin() {
         return login;
-    }
-
-    public String getSenha() {
-        return senha;
     }
 
     public LocalDateTime getDataRegistro() {

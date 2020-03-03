@@ -5,6 +5,7 @@ import bolaoSpring.model.Time;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TimeRepository extends CrudRepository<Time, Long> {
 

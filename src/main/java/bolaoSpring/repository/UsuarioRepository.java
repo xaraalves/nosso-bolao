@@ -5,8 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import bolaoSpring.model.Usuario;
 
+import java.util.Optional;
+
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
-	public Usuario findByLogin(String login);
+	Optional<Usuario> findByLogin(String login);
+
 }

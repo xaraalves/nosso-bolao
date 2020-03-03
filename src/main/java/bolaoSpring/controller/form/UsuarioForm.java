@@ -19,6 +19,13 @@ public class UsuarioForm {
     @Length(min = 6, message="Senha precisa ter no mínimo 6 caracteres")
     private String senha;
 
+    public UsuarioForm() { }
+
+    public UsuarioForm(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+
     public String getLogin() {
         return login;
     }

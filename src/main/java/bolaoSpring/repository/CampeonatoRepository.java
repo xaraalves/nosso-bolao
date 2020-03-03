@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CampeonatoRepository extends CrudRepository<Campeonato, Long> {
 
-    public Campeonato findByNome(String nome);
+    Campeonato findByNome(String nome);
 }
