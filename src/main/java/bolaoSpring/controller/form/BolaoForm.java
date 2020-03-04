@@ -1,15 +1,17 @@
 package bolaoSpring.controller.form;
 
-import bolaoSpring.model.Participante;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class BolaoForm {
 
     @NotNull
+    @NotBlank
     private String nomeCampeonato;
     @NotNull
+    @NotEmpty
     private List<String> convidados;
 
     public String getNomeCampeonato() {

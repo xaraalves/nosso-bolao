@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController
@@ -28,7 +29,7 @@ public class BolaoController {
     private UsuarioService usuarioService;
 
     @PostMapping("/bolao/cadastro")
-    public ResponseEntity cadastrarBolao(@RequestBody @NotNull BolaoForm bolaoForm) {
+    public ResponseEntity cadastrarBolao(@RequestBody @Valid BolaoForm bolaoForm) {
         try {
             //Inserindo um usuario conhecido caso haja a necessidade, uma vez que a feature de autenticação não foi implementada ainda
             this.cadastrarUsuario("gabriel1@mail.com", "123456");
